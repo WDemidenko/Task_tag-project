@@ -26,9 +26,9 @@
             <a class="btn-danger" href="{% url 'task:task-delete' pk=task.id %}">Delete</a>
           </p>
           {% if task.task_is_done %}
-            status: <p style="color: greenyellow">Done</p>
+            status: <p style="color: greenyellow"><strong>Done</strong></p>
             {% else %}
-            status: <p style="color: red">Not done</p>
+            status: <p style="color: red"><strong>Not done</strong></p>
           {% endif %}
           <p>Created: {{ task.created }}</p>
           <p>{% if task.deadline %}Deadline: {{ task.deadline }}{% endif %}</p>
