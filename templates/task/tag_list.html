@@ -3,6 +3,7 @@
 
 {% block content %}
   <h1>Tags</h1>
+  <a class="btn btn-primary" href="{% url 'task:tag-create' %}">add</a>
   {% if tag_list %}
     <table class="table">
       <tr>

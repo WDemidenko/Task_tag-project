@@ -1,10 +1,19 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.views import generic
 
-from task.forms import TaskCreatingForm
+from task.forms import TaskCreatingForm, TagCreatingForm
 from task.models import Task, Tag
+
+
+class TagsListView(generic.ListView):
+    model = Tag
+
+
+class TagCreateView(generic.CreateView):
+    model = Tag
+    form_class = TagCreatingForm
+    success_url = reverse_lazy("task:tag-list")
 
 
 class TaskListView(generic.ListView):
@@ -14,10 +23,6 @@ class TaskListView(generic.ListView):
     def get_queryset(self):
         self.queryset = Task.objects.order_by("task_is_done", "-created")
         return self.queryset
-
-
-class TagsListView(generic.ListView):
-    model = Tag
 
 
 class TaskCreateView(generic.CreateView):
