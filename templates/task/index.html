@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>TODO list</h1>
+  {% if task_list %}
+    <tr>
+      {% for task in task_list %}
+        <td class="table-light">{{ task }}</td>
+      {% endfor %}
+    </tr>
+  {% else %}
+    <p>No tasks</p>
+  {% endif %}
+{% endblock %}
