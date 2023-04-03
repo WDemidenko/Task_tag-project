@@ -6,7 +6,16 @@
   {% if task_list %}
     <ul class="list-group">
       {% for task in task_list %}
-        <li class="list-group-item"> <h4>{{ task.content }}</h4>
+        <li class="list-group-item">
+          <h4>
+            {{ task.content }}
+            {% if task.task_is_done %}
+              <a href="{% url 'task:complete-undo-task' pk=task.id %}" class="btn btn-dark">Undo</a>
+            {% else %}
+              <a href="{% url 'task:complete-undo-task' pk=task.id %}" class="btn btn-primary">Complete</a>
+            {% endif %}
+
+          </h4>
           <p>
             <a class="btn-info" href="{% url 'task:task-update' pk=task.id %}">Update</a>
             <a class="btn-danger" href="{% url 'task:task-delete' pk=task.id %}">Delete</a>

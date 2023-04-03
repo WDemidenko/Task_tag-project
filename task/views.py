@@ -1,4 +1,6 @@
-from django.urls import reverse_lazy
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
+from django.urls import reverse_lazy, reverse
 from django.views import generic
 
 from task.forms import TaskCreatingForm
@@ -35,3 +37,14 @@ class TaskUpdateView(generic.UpdateView):
 class TaskDeleteView(generic.DeleteView):
     model = Task
     success_url = reverse_lazy("task:task-list")
+
+
+def complete_undo_task(request, pk):
+    task = Task.objects.get(pk=pk)
+    if task.task_is_done:
+        task.task_is_done = False
+    else:
+        task.task_is_done = True
+    task.save()
+
+    return HttpResponseRedirect(reverse("task:task-list"))
