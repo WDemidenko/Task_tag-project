@@ -5,7 +5,7 @@
   {% if task_list %}
     <ul class="list-group">
       {% for task in task_list %}
-        <li class="list-group-item"> <h3>{{ task.content }}</h3>
+        <li class="list-group-item"> <h3>{{ task.content }} <a href="{% url 'task:task-create' %}">Add</a></h3>
           {% if task.task_is_done %}
             <p style="color: greenyellow">Done</p>
             {% else %}
