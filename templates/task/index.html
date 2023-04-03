@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-sm-10"><h1>TODO list</h1></div>
+    <div class="col-sm-2"><a href="{% url 'task:task-create' %}"><button class="btn-primary">Add task</button></a></div>
+  </div>
+  <br>
+
+  {% if task_list %}
+    <ul class="list-group">
+      {% for task in task_list %}
+        <li class="list-group-item">
+          <div class="row">
+              <div class="col-sm-10"><h5>{{ task.content }}</h5></div>
+              <div class="col-sm-2">
+                {% if task.task_is_done %}
+                  <a href="{% url 'task:complete-undo-task' pk=task.id %}" class="btn btn-dark">Undo</a>
+                {% else %}
+                  <a href="{% url 'task:complete-undo-task' pk=task.id %}" class="btn btn-success">Complete</a>
+                {% endif %}
+              </div>
+          </div>
+          <p>
+            <a class="btn-info" href="{% url 'task:task-update' pk=task.id %}">Update</a>
+            <a class="btn-danger" href="{% url 'task:task-delete' pk=task.id %}">Delete</a>
+          </p>
+          {% if task.task_is_done %}
+            status: <p style="color: greenyellow"><strong>Done</strong></p>
+            {% else %}
+            status: <p style="color: red"><strong>Not done</strong></p>
+          {% endif %}
+          <p>Created: {{ task.created }}</p>
+          <p>{% if task.deadline %}Deadline: {{ task.deadline }}{% endif %}</p>
+          <p>
+            Tags:
+            {% if task.tags %}
+              {% for tag in task.tags.all %}#{{ tag }} {% endfor %}
+            {% endif %}
+          </p>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No tasks</p>
+  {% endif %}
+{% endblock %}
