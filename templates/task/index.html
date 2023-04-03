@@ -5,7 +5,21 @@
   {% if task_list %}
     <ul class="list-group">
       {% for task in task_list %}
-        <li class="list-group-item"> {{ task.content }} {{ task.task_is_done }} {{ task.created }}</li>
+        <li class="list-group-item"> <h3>{{ task.content }}</h3>
+          {% if task.task_is_done %}
+            <p style="color: greenyellow">Done</p>
+            {% else %}
+            <p style="color: red">Not done</p>
+          {% endif %}
+          <p>Created: {{ task.created }}</p>
+          <p>{% if task.deadline %}Deadline: {{ task.deadline }}{% endif %}</p>
+          <p>
+            Tags:
+            {% if task.tags %}
+              {% for tag in task.tags.all %}{{ tag }} {% endfor %}
+            {% endif %}
+          </p>
+        </li>
       {% endfor %}
     </ul>
   {% else %}
