@@ -2,10 +2,14 @@
 
 {% block content %}
   <h1>TODO list</h1>
+  <a href="{% url 'task:task-create' %}"><button class="btn-primary">Add new task</button></a>
   {% if task_list %}
     <ul class="list-group">
       {% for task in task_list %}
-        <li class="list-group-item"> <h3>{{ task.content }} <a href="{% url 'task:task-create' %}">Add</a></h3>
+        <li class="list-group-item"> <h4>{{ task.content }}</h4>
+          <p>
+            <a class="btn-info" href="{% url 'task:task-update' pk=task.id %}">Update</a>
+          </p>
           {% if task.task_is_done %}
             <p style="color: greenyellow">Done</p>
             {% else %}

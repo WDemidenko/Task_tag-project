@@ -3,6 +3,9 @@
 
 
 {% block content %}
+  <h1>{{ object|yesno:"Update, Create" }} task</h1>
+  <a href="{% url 'task:task-list' %}"><button class="btn-outline-info">back</button></a>
+
   <form action="" method="post" novalidate>
     {% csrf_token %}
     {{ form|crispy }}
