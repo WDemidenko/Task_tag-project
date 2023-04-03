@@ -12,7 +12,7 @@
             {% if task.task_is_done %}
               <a href="{% url 'task:complete-undo-task' pk=task.id %}" class="btn btn-dark">Undo</a>
             {% else %}
-              <a href="{% url 'task:complete-undo-task' pk=task.id %}" class="btn btn-primary">Complete</a>
+              <a href="{% url 'task:complete-undo-task' pk=task.id %}" class="btn btn-success">Complete</a>
             {% endif %}
 
           </h4>
@@ -30,7 +30,7 @@
           <p>
             Tags:
             {% if task.tags %}
-              {% for tag in task.tags.all %}{{ tag }} {% endfor %}
+              {% for tag in task.tags.all %}#{{ tag }} {% endfor %}
             {% endif %}
           </p>
         </li>
